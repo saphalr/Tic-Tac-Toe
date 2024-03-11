@@ -1,0 +1,228 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root{
+    --orange: #f2c14e;
+}
+body{
+    font-family: 'Finger Paint', sans-serif;
+    color: var(--orange);
+    background-color:rgb(81, 98, 125)
+}
+
+h1{
+    font-size: 45px;
+    text-transform: uppercase;
+
+}
+
+.container{
+    padding: 40px;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /*align horizontally*/
+    align-items: center; /*align vertically*/
+    flex-direction: column;
+}
+
+#gameboard {
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    margin-top: 50px;
+    position: relative;
+}
+
+.box {
+    height: 99px;
+    width: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--orange);
+    font-size: 100px;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+}
+
+.box:nth-child(3n){
+    border-right: none;
+}
+
+.box:nth-last-child(-n+4){
+    border-bottom: none;
+}
+
+.strike{
+  position: absolute;
+  background-color: purple;
+  border-radius: 5px;
+}
+
+.strike-row-0{
+    width: 100%;
+    height:10px;
+    top: 15%;
+}
+
+.strike-row-3{
+    width: 100%;
+    height: 10px;
+    top: 48%;
+}
+.strike-row-6{
+    width: 100%;
+    height: 10px;
+    top: 83%;
+}
+
+.strike-col-0{
+    width: 10px;
+    height: 100%;
+    left: 15%;
+}
+.strike-col-1{
+    width: 10px;
+    height: 100%;
+    left: 48%;
+}
+.strike-col-2{
+    width: 10px;
+    height: 100%;
+    left: 83%;
+}
+
+.strike-diagonal-0{
+    height: 10px;
+    width: 137%;;
+  transform:rotate(45deg);
+  top: -3%;
+  left: -1%;
+  transform-origin:left;
+  animation:drawDiagonal 1s linear forwards;
+}
+@keyframes drawDiagonal{
+    to {width:137%;}
+}
+.strike-diagonal-2{
+    height: 10px;
+    width: 137%;;
+  transform:rotate(-45deg);
+  top: -2%;
+  right: 1%;
+  transform-origin:right;
+  animation: drawDiagonal 0.75s linear forwards;
+}
+.strike-row{
+        content: "";
+        /* position: absolute; */
+        width: 100%;
+        height: 10px;
+        animation: drawRow 0.75s linear forwards;
+    
+}
+@keyframes drawRow {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+.strike-col{
+    content: "";
+    width: 10px;
+    height:100%;
+    animation: drawCol 0.75s linear forwards
+}
+
+@keyframes drawCol {
+    0%{
+        height:0;
+    }
+    100%{
+        height:100%;
+    }
+}
+
+.strike-diagonal{
+    content: "";
+    height: 10px;
+    width: 140%;
+    animation: drawDiagonal 0.75s linear forwards;
+}
+@keyframes drawDiagonal{
+    0% {
+        width: 0;
+        height:0;
+    }
+    75%{
+        width:0;
+    }
+    100% {
+        width: 141%;
+        height: 10px; /* sqrt(2) * 100% to account for the rotation */
+    }
+}
+button{
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: var(--orange);
+    color: #333;
+    border-color: var(--orange);
+    font-size: 18px;
+    transition: 200ms transform;
+    font-weight: 600;
+}
+
+button:hover{
+   cursor: pointer;
+   transform: translateY(-2px);
+
+}
+
+.visible{
+    /* margin-top: 50px; */
+    /* margin-bottom: 50px; */
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+.hidden{
+    display: none;
+}
+
+@keyframes draw {
+    0% {
+      stroke-dashoffset: 188;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  #circle {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 188;
+    transform: rotateX(180deg);
+    transform-origin: 50% 50%;
+    animation: draw 0.25s linear forwards;
+  }
+
+  #path1{
+    stroke-dashoffset: 188;
+    stroke-dasharray: 188;
+    animation: draw 0.25s linear forwards;
+  }
+
+  #path2{
+    stroke-dashoffset: 188;
+    stroke-dasharray: 188;
+    /* animation-delay: 0.25s; */
+    animation: draw 0.25s linear forwards;
+    animation-delay: 0.25s;
+  }
+
